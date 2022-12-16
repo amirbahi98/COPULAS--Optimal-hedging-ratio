@@ -1,0 +1,42 @@
+#PYCOP.GITHUB
+
+
+import pandas as pd
+import numpy as np
+#add your own file in below sentence 
+
+df = pd.read_excel("C:/Users/click technology/Desktop\PYTHON-GOLD.xlsx")
+
+for col in df.columns.values:
+    df[col] = np.log(df[col]) - np.log(df[col].shift(1))
+
+df = df.dropna()
+df.head()
+import pycop
+from pycop import archimedean, estimation
+cop = archimedean(family="clayton")
+
+data = df[["S","F"]].T.values
+param, cmle = estimation.fit_cmle(cop, data)
+print("Estimated parameter: ", param[0])
+from pycop import mixture
+
+cop = mixture(["clayton", "gumbel"])
+
+param, mle = estimation.fit_cmle_mixt(cop,data )
+print("Estimated parameters: ")
+print("weight in Clayton copula: ", param[0])
+print("weight in Gumbel copula: ", 1-param[0])
+print("Clayton parameter: ", param[1])
+print("Gumbel parameter: ", param[2])
+cop = mixture(["clayton", "frank", "gumbel"])
+
+param, mle = estimation.fit_cmle_mixt(cop, data)
+print("Estimated parameters: ")
+print("weight in Clayton copula: ", param[0])
+print("weight in Frank copula: ", param[1])
+print("weight in Gumbel copula: ", param[2])
+print("Clayton parameter: ", param[3])
+print("Frank parameter: ", param[4])
+print("Gumbel parameter: ", param[5])
+print("gumbel covariance matrix")
