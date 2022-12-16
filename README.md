@@ -1,2 +1,2 @@
 # COPULAS--Optimal-hedging-ratio
-Copula models-
+I WILL EXPLAIN ALL OF DETAILS ABOUT WHAT I DID. COMING SOON......
