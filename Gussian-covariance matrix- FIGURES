@@ -1,0 +1,26 @@
+#GUSSIAN COPULA
+
+import copulas
+import pandas as pd
+import pip
+
+mydata = pd.read_excel("C:/Users/click technology/Desktop\PYTHON-GOLD.xlsx")
+
+data = mydata
+data.head()
+from copulas.visualization import scatter_3d
+
+from copulas.multivariate import GaussianMultivariate
+
+copula = GaussianMultivariate()
+copula.fit(data)
+num_samples = 1151
+synthetic_data = copula.sample(num_samples)
+synthetic_data.head()
+from copulas.visualization import compare_3d
+compare_3d(data, synthetic_data)
+copula_params = copula.to_dict()
+new_copula = GaussianMultivariate.from_dict(copula_params)
+new_samples = new_copula.sample(num_samples)
+
+    
