@@ -1,0 +1,20 @@
+#GUSSIAN COPULA
+
+import matplotlib.pyplot as plt
+import pandas as pd
+from copulas.multivariate import GaussianMultivariate
+from copulas.visualization import compare_3d
+
+df = pd.read_excel('C:/Users/click technology/Desktop/python-zaferan.xlsx')
+cols = ['S', 'F']
+
+copula = GaussianMultivariate()
+copula.fit(df[cols])
+
+
+# generate synthetic data from our fit
+sd = copula.sample(df.shape[0])
+
+
+compare_3d(df[cols], sd)
+plt.show()
